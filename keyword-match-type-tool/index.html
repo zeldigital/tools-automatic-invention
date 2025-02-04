@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SEO-optimized Keyword Match Type Tool for digital marketers, PPC specialists, and SEO experts to generate broad match, modified broad match, phrase match, and exact match keywords.">
+    <meta name="keywords" content="keyword match tool, SEO keyword generator, PPC keyword tool, broad match keyword tool, phrase match keyword tool, exact match keywords, digital marketing, SEO tools">
+    <meta name="author" content="Your Company Name">
+    <title>Keyword Match Type Tool - SEO Optimized for Digital Marketing</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+            font-size: 16px;
+        }
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .options div {
+            display: flex;
+            flex-direction: column;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .green-button {
+            background-color: #28a745;
+            color: white;
+        }
+        .orange-button {
+            background-color: #ff9800;
+            color: white;
+        }
+        .blue-button {
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+        }
+        #results {
+            height: 150px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+            textarea {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .options {
+                flex-direction: column;
+            }
+            textarea {
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2137593406454250"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-2137593406454250"
+     data-ad-slot="1011661937"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="container">
+        <h1>Keyword Match Type Tool - SEO Optimized</h1>
+        <textarea id="input1" placeholder="Enter keywords, one per line"></textarea>
+        <textarea id="input2" placeholder="Enter more keywords, one per line (optional)"></textarea>
+        <textarea id="input3" placeholder="Add even more keywords, one per line (optional)"></textarea>
+
+        <div class="options">
+            <div>
+                <label><strong>Separator:</strong></label>
+                <label><input type="radio" name="separator" value="space" checked> Space</label>
+                <label><input type="radio" name="separator" value="nothing"> No separator</label>
+                <label><input type="radio" name="separator" value="dash"> Dash (-)</label>
+            </div>
+
+            <div>
+                <label><strong>Select match type:</strong></label>
+                <label><input type="checkbox" id="broad"> Broad match</label>
+                <label><input type="checkbox" id="modified"> Modified broad match (+)</label>
+                <label><input type="checkbox" id="phrase"> "Phrase match"</label>
+                <label><input type="checkbox" id="exact"> [Exact match]</label>
+                <label><input type="checkbox" id="lowercase"> Change to lowercase</label>
+            </div>
+        </div>
+
+        <button class="green-button" onclick="generateKeywords()">Generate Keyword List</button>
+        <button class="orange-button" onclick="clearFields()">Clear Fields</button>
+
+        <textarea id="results" placeholder="Results will appear here" readonly></textarea>
+        <button class="blue-button" onclick="copyResults()">Copy Results</button>
+    </div>
+
+    <script>
+        function generateKeywords() {
+            let inputs = [
+                document.getElementById('input1').value,
+                document.getElementById('input2').value,
+                document.getElementById('input3').value
+            ];
+
+            let separator = document.querySelector('input[name="separator"]:checked').value;
+            let matchTypes = {
+                broad: document.getElementById('broad').checked,
+                modified: document.getElementById('modified').checked,
+                phrase: document.getElementById('phrase').checked,
+                exact: document.getElementById('exact').checked,
+                lowercase: document.getElementById('lowercase').checked
+            };
+
+            let inputs1 = inputs[0].split('\n').map(kw => kw.trim()).filter(kw => kw);
+            let inputs2 = inputs[1].split('\n').map(kw => kw.trim()).filter(kw => kw);
+            let inputs3 = inputs[2].split('\n').map(kw => kw.trim()).filter(kw => kw);
+
+            if (matchTypes.lowercase) {
+                inputs1 = inputs1.map(kw => kw.toLowerCase());
+                inputs2 = inputs2.map(kw => kw.toLowerCase());
+                inputs3 = inputs3.map(kw => kw.toLowerCase());
+            }
+
+            let results = [];
+
+            inputs1.forEach(input1 => {
+                inputs2.forEach(input2 => {
+                    inputs3.forEach(input3 => {
+                        let combinations = [input1, input2, input3].filter(Boolean).join(' ');
+
+                        if (matchTypes.broad) results.push(combinations);
+                        if (matchTypes.modified) results.push('+' + combinations.replace(/\s+/g, ' +'));
+                        if (matchTypes.phrase) results.push('"' + combinations + '"');
+                        if (matchTypes.exact) results.push('[' + combinations + ']');
+                    });
+                });
+            });
+
+            document.getElementById('results').value = results.join('\n');
+        }
+
+        function clearFields() {
+            document.getElementById('input1').value = '';
+            document.getElementById('input2').value = '';
+            document.getElementById('input3').value = '';
+            document.getElementById('results').value = '';
+        }
+
+        function copyResults() {
+            let resultArea = document.getElementById('results');
+            resultArea.select();
+            document.execCommand('copy');
+            alert('Results copied to clipboard!');
+        }
+    </script>
+</body>
+</html>

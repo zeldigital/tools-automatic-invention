@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accurately measure your return on ad spend (ROAS) and return on investment (ROI) with this SEO-optimized, user-friendly calculator designed for digital marketers and businesses looking to maximize ad profitability.">
+    <meta name="keywords" content="ROAS calculator, return on ad spend tool, ROI calculator, digital marketing ROI, ad profitability calculator, optimize ad spend, marketing performance metrics">
+    <title>ROAS & ROI Calculator - Optimize Ad Profitability</title>
+    <style>
+        body {
+            font-family: 'Arial, sans-serif';
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .tool-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h3 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 12px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .result-container {
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feedback {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .feedback.good {
+            color: #28a745;
+        }
+
+        .feedback.warning {
+            color: #ffc107;
+        }
+
+        .feedback.bad {
+            color: #dc3545;
+        }
+
+        .action-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .action-links a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .action-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .tool-container {
+                padding: 20px;
+            }
+            h3 {
+                font-size: 20px;
+            }
+            .btn {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tool-container {
+                padding: 15px;
+            }
+            input, .btn {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2137593406454250"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-2137593406454250"
+     data-ad-slot="1011661937"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="tool-container">
+        <h3>Return on Ad Spend (ROAS) & Return on Investment (ROI)</h3>
+
+        <label for="adSpend">Ad Spend (₱)</label>
+        <input type="number" id="adSpend" placeholder="Enter total ad spend" required>
+
+        <label>Do you know your revenue?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="revenueOption" value="yes" checked> Yes</label>
+            <label><input type="radio" name="revenueOption" value="no"> No</label>
+        </div>
+
+        <label for="revenue" id="revenueLabel">Ad Revenue (₱)</label>
+        <input type="number" id="revenue" placeholder="Enter total revenue" required>
+
+        <label for="profitMargin">Profit Margin (₱)</label>
+        <input type="number" id="profitMargin" placeholder="Enter your profit margin (if applicable)">
+
+        <button class="btn" onclick="calculateMetrics()">Calculate</button>
+
+        <div class="result-container" id="resultContainer" style="display: none;">
+            <p><strong>ROAS:</strong> <span id="roasResult">0%</span></p>
+            <p><strong>ROI:</strong> <span id="roiResult">0%</span></p>
+            <p class="feedback" id="roasFeedback"></p>
+        </div>
+
+        <div class="action-links">
+            <a href="#" onclick="shareResult()">Share result</a>
+            <a href="#" onclick="reloadCalculator()">Reload calculator</a>
+            <a href="#" onclick="clearFields()">Clear all changes</a>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('input[name="revenueOption"]').forEach(option => {
+            option.addEventListener('change', () => {
+                const revenueInput = document.getElementById('revenue');
+                const revenueLabel = document.getElementById('revenueLabel');
+                if (option.value === 'no') {
+                    revenueInput.disabled = true;
+                    revenueInput.value = '';
+                    revenueLabel.style.color = '#ccc';
+                } else {
+                    revenueInput.disabled = false;
+                    revenueLabel.style.color = '#333';
+                }
+            });
+        });
+
+        function calculateMetrics() {
+            const revenue = parseFloat(document.getElementById('revenue').value);
+            const adSpend = parseFloat(document.getElementById('adSpend').value);
+            const profitMargin = parseFloat(document.getElementById('profitMargin').value) || 0;
+            const revenueOption = document.querySelector('input[name="revenueOption"]:checked').value;
+
+            if (isNaN(adSpend) || adSpend <= 0) {
+                alert('Please enter a valid ad spend amount.');
+                return;
+            }
+
+            let roas = 0;
+            let roi = 0;
+
+            if (revenueOption === 'yes') {
+                if (isNaN(revenue) || revenue <= 0) {
+                    alert('Please enter a valid revenue amount.');
+                    return;
+                }
+                roas = ((revenue / adSpend) * 100).toFixed(2);
+                roi = ((profitMargin / adSpend) * 100).toFixed(2);
+            }
+
+            document.getElementById('roasResult').innerText = `${roas}%`;
+            document.getElementById('roiResult').innerText = `${roi}%`;
+
+            let feedback = '';
+            let feedbackClass = 'bad';
+
+            if (roas >= 800) {
+                feedback = '✅ Excellent! You have a highly profitable campaign.';
+                feedbackClass = 'good';
+            } else if (roas >= 400) {
+                feedback = '⚠️ Your ROAS is good, but you can improve to reach 800% or more.';
+                feedbackClass = 'warning';
+            } else {
+                feedback = '❌ Your ROAS is low. Consider optimizing your ad spend or revenue generation.';
+            }
+
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.style.display = 'block';
+            const feedbackElement = document.getElementById('roasFeedback');
+            feedbackElement.innerText = feedback;
+            feedbackElement.className = `feedback ${feedbackClass}`;
+        }
+
+        function shareResult() {
+            const roas = document.getElementById('roasResult').innerText;
+            const roi = document.getElementById('roiResult').innerText;
+            const text = `Check out my marketing performance! ROAS: ${roas}, ROI: ${roi}. Calculate yours here: [Your Tool Link]`;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=[Your Tool Link]&quote=${encodeURIComponent(text)}`;
+            const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=[Your Tool Link]`;
+
+            const shareOptions = `Choose where to share:
+1. Twitter: ${twitterUrl}
+2. Facebook: ${facebookUrl}
+3. LinkedIn: ${linkedinUrl}`;
+
+            alert(shareOptions);
+        }
+
+        function reloadCalculator() {
+            location.reload();
+        }
+
+        function clearFields() {
+            document.getElementById('adSpend').value = '';
+            document.getElementById('revenue').value = '';
+            document.getElementById('profitMargin').value = '';
+            document.getElementById('resultContainer').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

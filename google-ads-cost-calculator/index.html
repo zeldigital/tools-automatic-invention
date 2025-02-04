@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Google Ads Budget Calculator - Plan your monthly and annual ad budgets, optimize campaigns based on CPC, ROI, and achieve success with tailored ad strategy.">
+    <meta name="keywords" content="Google Ads Budget Planner, Monthly Ad Budget Calculator, CPC Optimization Tool, Google Ads ROI Calculator, Digital Marketing Budget Planning">
+    <meta name="author" content="Your Name or Brand">
+    <title>Google Ads Budget Calculator | Plan Ad Campaigns Effectively</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .grid-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        label {
+            font-size: 14px;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .result {
+            background-color: #eef6ff;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+        }
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script>
+        function updateMetrics() {
+            let adSpend = parseFloat(document.getElementById('ad-spend').value) || 0;
+            let cpc = parseFloat(document.getElementById('cpc').value) || 0;
+            let conversionRate = parseFloat(document.getElementById('conversion-rate').value) || 0;
+
+            if (adSpend > 0 && cpc > 0 && conversionRate > 0) {
+                let totalSessions = Math.floor(adSpend / cpc);
+                let leads = Math.floor(totalSessions * (conversionRate / 100));
+                let costPerLead = leads > 0 ? (adSpend / leads).toFixed(2) : 0;
+
+                document.getElementById('metrics-result').innerHTML = `
+                    <strong>Google Ads Lead Metrics:</strong><br>
+                    Total Website Sessions from PPC: ${totalSessions}<br>
+                    Conversions/Leads: ${leads}<br>
+                    Cost Per Raw Inquiry: $${costPerLead}
+                `;
+            } else {
+                document.getElementById('metrics-result').innerHTML = "Please enter positive values for all fields.";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', updateMetrics); // Calculate when the page loads
+        document.addEventListener('input', updateMetrics); // Update when inputs change
+    </script>
+</head>
+<body>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2137593406454250"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-2137593406454250"
+     data-ad-slot="1011661937"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="container">
+        <h2>Google Ads Cost Calculator</h2>
+
+        <div class="grid">
+            <div class="grid-item">
+                <label for="ad-spend">Google Ad Spend Per Month ($)</label>
+                <input type="number" id="ad-spend" value="10000" placeholder="e.g., 4000">
+            </div>
+            <div class="grid-item">
+                <label for="cpc">Average Cost Per Click ($)</label>
+                <input type="number" id="cpc" value="1" placeholder="e.g., 1">
+            </div>
+            <div class="grid-item">
+                <label for="conversion-rate">Lead Conversion Rate (%)</label>
+                <input type="number" id="conversion-rate" value="15" placeholder="e.g., 15">
+            </div>
+        </div>
+
+        <div id="metrics-result" class="result" style="margin-top: 20px;"></div>
+    </div>
+</body>
+</html>
